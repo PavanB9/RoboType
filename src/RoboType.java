@@ -445,6 +445,7 @@ public class RoboType {
         } else if (ch == ' ') {
             robot.keyPress(KeyEvent.VK_SPACE);
             robot.keyRelease(KeyEvent.VK_SPACE);
+               
         }
     }
 }
