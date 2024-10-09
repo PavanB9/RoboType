@@ -1,18 +1,17 @@
-## Getting Started
+Download the Robotype.jar file and run it to access the script.
+To run Jar files, make sure to have Java downloaded on your Computer, go to your terminal/command line, and type 
+"java -jar RoboType.jar"
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+RoboType is a simple Java application that simulates typing on your computer using the Robot class from java.awt. It takes input from the user, waits for 5 seconds to allow switching to another window or text field, and then automatically types the text with random delays for a more natural typing effect.
 
-## Folder Structure
+Features:
+  Simulates human-like typing with varying speeds.
+  Includes random deletions to mimic typing errors.
+  Supports lowercase, uppercase, numbers, and special characters
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Usage: 
+  Run the program.
+  Enter the text you want to simulate typing.
+  Switch to another window or text field within 5 seconds.
+  Watch as RoboType types out your input.
+  Enter 0 to type again, or any other input to stop the program.
