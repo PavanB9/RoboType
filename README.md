@@ -9,7 +9,7 @@ Features:
   Includes random deletions to mimic typing errors.
   Supports lowercase, uppercase, numbers, and special characters
 
-Usage
+Usage: 
   Run the program.
   Enter the text you want to simulate typing.
   Switch to another window or text field within 5 seconds.
