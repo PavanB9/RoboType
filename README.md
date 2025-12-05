@@ -1,4 +1,4 @@
-Download the Robotype.jar file and run it to access the script.
+Download the first.jar file and run it to access the script.
 To run Jar files, make sure to have Java downloaded on your Computer, go to your terminal/command line, and type 
 "java -jar first.jar"
 (Make sure to open the terminal form the folder, where u saved the jar file, or navigate ur terminal to that folder first)
