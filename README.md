@@ -70,8 +70,8 @@ java -jar RoboType.jar
 # Navigate to the project folder
 cd RoboType/src
 
-# Compile all Java files
-javac RoboType.java RoboTypeGUI.java
+# Compile the Java file
+javac RoboTypeGUI.java
 
 # Create the JAR (from RoboType root folder)
 cd ..
@@ -99,8 +99,7 @@ java -jar RoboType.jar
 ```
 RoboType/
 ├── src/
-│   ├── RoboType.java          # Command-line version
-│   └── RoboTypeGUI.java       # GUI version (recommended)
+│   └── RoboTypeGUI.java       # GUI application
 ├── bin/                        # Compiled classes
 ├── build.sh                    # Build script (macOS/Linux)
 ├── RoboType.jar               # Pre-compiled executable
@@ -108,24 +107,6 @@ RoboType/
 ├── README.md                  # This file
 └── LICENSE                    # GPLv3 License
 ```
-
-## Two Versions Available
-
-### RoboTypeGUI (Recommended) 🎨
-- Modern graphical interface
-- Real-time controls and feedback
-- Speed adjustment slider
-- Floating stop button during typing
-- Better user experience
-
-**Main Class**: `RoboTypeGUI`
-
-### RoboType (CLI Version) 💻
-- Command-line interface
-- Simple text input
-- Legacy version with basic functionality
-
-**Main Class**: `RoboType`
 
 ## System Requirements
 
@@ -166,7 +147,7 @@ This application uses Java's `Robot` class for keyboard automation. Depending on
 - Try running as administrator
 
 **Build fails:**
-- Ensure both `RoboType.java` and `RoboTypeGUI.java` are in `src/` folder
+- Ensure `RoboTypeGUI.java` is in `src/` folder
 - Check Java compiler is installed: `javac -version`
 
 ## License
