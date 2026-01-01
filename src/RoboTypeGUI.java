@@ -194,13 +194,23 @@ public class RoboTypeGUI extends JFrame {
         buttonPanel.setBackground(new Color(250, 250, 250));
 
         startButton = new JButton("Start Typing");
-        startButton.setFont(new Font("System", Font.BOLD, 13));
+        startButton.setFont(new Font("System", Font.BOLD, 14));
         startButton.setPreferredSize(new Dimension(130, 38));
-        startButton.setBackground(new Color(0, 120, 215));
+        startButton.setBackground(new Color(34, 139, 34)); // Bright green
         startButton.setForeground(Color.WHITE);
-        startButton.setBorderPainted(false);
+        startButton.setBorderPainted(true);
+        startButton.setBorder(BorderFactory.createLineBorder(new Color(28, 120, 28), 2));
         startButton.setFocusPainted(false);
         startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        startButton.setOpaque(true);
+        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                startButton.setBackground(new Color(40, 160, 40));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                startButton.setBackground(new Color(34, 139, 34));
+            }
+        });
         startButton.addActionListener(e -> startTyping());
 
         cancelButton = new JButton("Cancel");
@@ -327,14 +337,25 @@ public class RoboTypeGUI extends JFrame {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton stopBtn = new JButton("Stop Typing");
-        stopBtn.setFont(new Font("System", Font.BOLD, 12));
+        stopBtn.setFont(new Font("System", Font.BOLD, 14));
         stopBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        stopBtn.setMaximumSize(new Dimension(140, 36));
-        stopBtn.setBackground(new Color(220, 50, 50));
+        stopBtn.setMaximumSize(new Dimension(140, 40));
+        stopBtn.setPreferredSize(new Dimension(140, 40));
+        stopBtn.setBackground(new Color(220, 20, 60)); // Bright crimson red
         stopBtn.setForeground(Color.WHITE);
-        stopBtn.setBorderPainted(false);
+        stopBtn.setBorderPainted(true);
+        stopBtn.setBorder(BorderFactory.createLineBorder(new Color(180, 10, 40), 2));
         stopBtn.setFocusPainted(false);
         stopBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        stopBtn.setOpaque(true);
+        stopBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                stopBtn.setBackground(new Color(255, 40, 80));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                stopBtn.setBackground(new Color(220, 20, 60));
+            }
+        });
         stopBtn.addActionListener(e -> {
             isTyping = false;
             floatingWindow.dispose();
