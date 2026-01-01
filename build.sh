@@ -1,15 +1,19 @@
 #!/bin/bash
 
-# RoboType Build Script
+# RoboType Build Script - Compiles and creates JAR
+
+set -e
 
 echo "🔨 Building RoboType JAR..."
 
-cd "$(dirname "$0")"
+# Get script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
 
 # Compile
-echo "📝 Compiling Java files..."
+echo "📝 Compiling RoboTypeGUI.java..."
 cd src
-javac *.java
+javac RoboTypeGUI.java
 
 if [ $? -ne 0 ]; then
     echo "❌ Compilation failed!"
@@ -19,11 +23,13 @@ fi
 # Create JAR
 echo "📦 Creating JAR file..."
 cd ..
-jar cfm RoboType.jar MANIFEST.MF -C src .
+rm -f RoboType.jar
+jar cfe RoboType.jar RoboTypeGUI -C src .
 
 if [ $? -eq 0 ]; then
-    echo "✅ Build complete! Run with: java -jar RoboType.jar"
+    echo "✅ Build complete!"
+    echo "🚀 Run with: java -jar RoboType.jar"
 else
-    echo "❌ Build failed!"
+    echo "❌ JAR creation failed!"
     exit 1
 fi

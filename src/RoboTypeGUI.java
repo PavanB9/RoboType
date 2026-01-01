@@ -26,13 +26,13 @@ public class RoboTypeGUI extends JFrame {
     private static final int TYPO_CHANCE = 95;
     private static final int LONG_BREAK_CHANCE = 97;
     private static final int MIN_DELETE_INDEX = 5;
-    private static final int NORMAL_DELAY_MS = 100;
-    private static final int SLOW_DELAY_MS = 350;
-    private static final int VERY_SLOW_DELAY_MS = 800;
-    private static final int DELETE_DELAY_MS = 120;
-    private static final int TYPO_DELAY_MS = 300;
-    private static final int LONG_BREAK_MS = 2000;
-    private static final int PUNCTUATION_PAUSE_MS = 400;
+    private static final int NORMAL_DELAY_MS = 40;
+    private static final int SLOW_DELAY_MS = 150;
+    private static final int VERY_SLOW_DELAY_MS = 400;
+    private static final int DELETE_DELAY_MS = 60;
+    private static final int TYPO_DELAY_MS = 150;
+    private static final int LONG_BREAK_MS = 1000;
+    private static final int PUNCTUATION_PAUSE_MS = 200;
 
     private static final Map<Character, Integer> CHAR_TO_KEYEVENT = new HashMap<>();
 
@@ -125,7 +125,7 @@ public class RoboTypeGUI extends JFrame {
         speedPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         speedPanel.setBackground(new Color(250, 250, 250));
 
-        speedSlider = new JSlider(JSlider.HORIZONTAL, 1, 6, 5);
+        speedSlider = new JSlider(JSlider.HORIZONTAL, 1, 6, 3);
         speedSlider.setMajorTickSpacing(1);
         speedSlider.setPaintTicks(true);
         speedSlider.setPaintLabels(true);
@@ -194,9 +194,9 @@ public class RoboTypeGUI extends JFrame {
         buttonPanel.setBackground(new Color(250, 250, 250));
 
         startButton = new JButton("Start Typing");
-        startButton.setFont(new Font("System", Font.PLAIN, 13));
+        startButton.setFont(new Font("System", Font.BOLD, 13));
         startButton.setPreferredSize(new Dimension(130, 38));
-        startButton.setBackground(new Color(50, 120, 240));
+        startButton.setBackground(new Color(0, 120, 215));
         startButton.setForeground(Color.WHITE);
         startButton.setBorderPainted(false);
         startButton.setFocusPainted(false);
@@ -204,7 +204,7 @@ public class RoboTypeGUI extends JFrame {
         startButton.addActionListener(e -> startTyping());
 
         cancelButton = new JButton("Cancel");
-        cancelButton.setFont(new Font("System", Font.PLAIN, 13));
+        cancelButton.setFont(new Font("System", Font.BOLD, 13));
         cancelButton.setPreferredSize(new Dimension(130, 38));
         cancelButton.setBackground(new Color(200, 200, 200));
         cancelButton.setForeground(new Color(0, 0, 0));
@@ -215,10 +215,10 @@ public class RoboTypeGUI extends JFrame {
         cancelButton.addActionListener(e -> cancelTyping());
 
         resetButton = new JButton("Reset");
-        resetButton.setFont(new Font("System", Font.PLAIN, 13));
+        resetButton.setFont(new Font("System", Font.BOLD, 13));
         resetButton.setPreferredSize(new Dimension(130, 38));
-        resetButton.setBackground(new Color(200, 200, 200));
-        resetButton.setForeground(new Color(0, 0, 0));
+        resetButton.setBackground(new Color(100, 100, 100));
+        resetButton.setForeground(Color.WHITE);
         resetButton.setBorderPainted(false);
         resetButton.setFocusPainted(false);
         resetButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -296,7 +296,6 @@ public class RoboTypeGUI extends JFrame {
                     speedSlider.setEnabled(true);
                     typoCheckBox.setEnabled(true);
                     deletionCheckBox.setEnabled(true);
-                    // Only update status if not already updated by catch block or output completion
                     if (!completedNaturally && statusLabel.getText().isEmpty()) {
                         statusLabel.setText("Typing stopped");
                         statusLabel.setForeground(new Color(244, 67, 54));
@@ -328,19 +327,14 @@ public class RoboTypeGUI extends JFrame {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton stopBtn = new JButton("Stop Typing");
-        stopBtn.setFont(new Font("System", Font.PLAIN, 12));
+        stopBtn.setFont(new Font("System", Font.BOLD, 12));
         stopBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         stopBtn.setMaximumSize(new Dimension(140, 36));
-        stopBtn.setBackground(new Color(220, 70, 60));
+        stopBtn.setBackground(new Color(220, 50, 50));
         stopBtn.setForeground(Color.WHITE);
         stopBtn.setBorderPainted(false);
         stopBtn.setFocusPainted(false);
         stopBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        stopBtn.setBackground(new Color(220, 70, 60));
-        stopBtn.setForeground(Color.WHITE);
-        stopBtn.setBorderPainted(false);
-        stopBtn.setFocusPainted(false);
-        stopBtn.setMaximumSize(new Dimension(140, 36));
         stopBtn.addActionListener(e -> {
             isTyping = false;
             floatingWindow.dispose();
@@ -399,15 +393,17 @@ public class RoboTypeGUI extends JFrame {
             char ch = text.charAt(i);
             int random = (int) (Math.random() * 100);
 
-            // Speed adjustment based on slider
+            // Speed adjustment based on slider (1-6)
             int speedFactor = speedSlider.getValue();
             int baseDelay;
-            if (speedFactor <= 4) {
-                baseDelay = NORMAL_DELAY_MS * (7 - speedFactor);
-            } else if (speedFactor == 5) {
-                baseDelay = 100;
-            } else {
-                baseDelay = 20;
+            switch (speedFactor) {
+                case 1: baseDelay = 120; break;  // Very Slow
+                case 2: baseDelay = 80;  break;  // Slow
+                case 3: baseDelay = 40;  break;  // Normal
+                case 4: baseDelay = 20;  break;  // Fast
+                case 5: baseDelay = 10;  break;  // Very Fast
+                case 6: baseDelay = 5;   break;  // Ultra Fast
+                default: baseDelay = 40;
             }
 
             // Occasional long thinking pauses
@@ -417,47 +413,47 @@ public class RoboTypeGUI extends JFrame {
                 continue;
             }
 
-            // Occasional typos (type wrong char, pause, then delete)
+            // Occasional typos
             if (typoCheckBox.isSelected() && random >= TYPO_CHANCE && i < text.length() - 1) {
-                type(robot, (char) (ch + 1)); // Type next character by mistake
+                type(robot, (char) (ch + 1));
                 sleep(TYPO_DELAY_MS);
                 robot.keyPress(KeyEvent.VK_BACK_SPACE);
                 robot.keyRelease(KeyEvent.VK_BACK_SPACE);
-                sleep(100);
-                type(robot, ch); // Type correct character
+                sleep(50);
+                type(robot, ch);
                 sleep(SLOW_DELAY_MS);
                 continue;
             }
 
-            // Type the character based on speed
+            // Type character based on speed
             int typingDelay;
             if (random < NORMAL_TYPING_CHANCE) {
-                typingDelay = baseDelay + (int)(Math.random() * 40);
+                typingDelay = baseDelay + (int)(Math.random() * 20);
             } else if (random < SLOW_TYPING_CHANCE) {
-                typingDelay = SLOW_DELAY_MS + (int)(Math.random() * 150);
+                typingDelay = (int)(baseDelay * 2.5) + (int)(Math.random() * 30);
             } else {
-                typingDelay = baseDelay + (int)(Math.random() * 40);
+                typingDelay = baseDelay + (int)(Math.random() * 20);
             }
 
             type(robot, ch);
             sleep(typingDelay);
 
-            // Random deletion of just-typed character (avoid special chars)
+            // Random deletion
             boolean isSpecialChar = ch == ' ' || ch == '\n' || ch == '\t' || ch == '.' || ch == ',' || ch == '!' || ch == '?' || ch == ';' || ch == ':';
             if (deletionCheckBox.isSelected() && !isSpecialChar && random >= TYPO_CHANCE - 20 && random < TYPO_CHANCE && i > MIN_DELETE_INDEX) {
                 sleep(DELETE_DELAY_MS);
                 robot.keyPress(KeyEvent.VK_BACK_SPACE);
                 robot.keyRelease(KeyEvent.VK_BACK_SPACE);
                 sleep(DELETE_DELAY_MS);
-                type(robot, ch); // Retype the character
-                sleep(NORMAL_DELAY_MS);
+                type(robot, ch);
+                sleep((int)(baseDelay * 1.5));
             }
 
             // Pause after punctuation
             if (ch == '.' || ch == '?' || ch == '!') {
                 sleep(PUNCTUATION_PAUSE_MS);
             } else if (ch == ',' || ch == ';') {
-                sleep(200);
+                sleep(100);
             }
         }
     }
