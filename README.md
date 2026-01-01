@@ -7,7 +7,7 @@ RoboType is a cross-platform Java application that simulates realistic human typ
 - ✨ Simulates human-like typing with varying speeds
 - 🐛 Includes random typos and corrections
 - 🗑️ Random character deletions to mimic typing errors
-- ⚡ Adjustable typing speed (Very Slow to Ultra Fast)
+- ⚡ Adjustable typing speed (Very Slow to Ultra Fast) 
 - 🎛️ Toggle typos and deletions on/off
 - 🎨 Modern, intuitive GUI with floating stop button
 - 💻 Works on both Windows and macOS
