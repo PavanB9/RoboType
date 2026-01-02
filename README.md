@@ -108,12 +108,6 @@ RoboType/
 └── LICENSE                    # GPLv3 License
 ```
 
-## System Requirements
-
-- **Java**: 8 or higher
-- **RAM**: 128 MB minimum
-- **OS**: Windows, macOS, Linux
-
 ## Permissions Note
 
 This application uses Java's `Robot` class for keyboard automation. Depending on your OS and security settings, you may need to:
@@ -153,7 +147,3 @@ This application uses Java's `Robot` class for keyboard automation. Depending on
 ## License
 
 Licensed under GNU General Public License v3 (GPLv3) - See [LICENSE](LICENSE)
-
-## Support
-
-For issues or suggestions, please open an issue on GitHub.
