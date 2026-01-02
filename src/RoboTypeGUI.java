@@ -188,6 +188,7 @@ public class RoboTypeGUI extends JFrame {
 
         mainPanel.add(Box.createVerticalStrut(20));
 
+        
         // Buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 12, 0));
